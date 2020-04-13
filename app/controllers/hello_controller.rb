@@ -1,17 +1,19 @@
 class HelloController < ApplicationController
 
 
-	def index
-		if params['msg'] != nil then
-			@title = params['msg']
-		else
-			@title = 'index'
-		end
-		@msg = 'this is redirect sample...'
-	end
+  def index
+    if request.post? then
+      @title = 'Result'
+      if params['r1'] then
+        @msg = 'you selected: ' + params['r1']
+      else 
+        @msg = 'not selected...'
+      end
+    else
+      @title = 'Index'
+      @msg = 'select radio button...'
+    end
+  end
 
-	def other
-		redirect_to action: :index, params: {'msg': 'from other page'}
-	end
-	
+
 end
